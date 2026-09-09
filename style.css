@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+body {
+  margin: 0;
+  background: #061826;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+#game {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+}
+
+#hud {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 10px;
+  background: #09283c;
+}
+
+#hud div {
+  background: #0d3851;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 430px;
+  background: linear-gradient(
+    #67cfe4 0%,
+    #217b9c 35%,
+    #123e5c 70%,
+    #051c2e 100%
+  );
+}
+
+#controls {
+  padding: 10px;
+  text-align: center;
+  background: #09283c;
+}
+
+button {
+  min-width: 60px;
+  min-height: 50px;
+  margin: 4px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#fire {
+  background: orange;
+}
+
+#sell {
+  background: #43c46b;
+}
+
+.move-pad {
+  margin-bottom: 6px;
+}
