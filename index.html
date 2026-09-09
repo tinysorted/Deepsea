@@ -1,39 +1,139 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <meta name="theme-color" content="#061826" />
+
   <title>Deep Catch: Abyss Hunter</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="style.css?v=2"
+  />
 </head>
+
 <body>
 
-  <div id="game">
-    <div id="hud">
-      <div>Coin: <span id="coins">0</span></div>
-      <div>Cargo: <span id="cargo">0</span>/5</div>
-      <div>Oxygen: <span id="oxygen">100</span>%</div>
-      <div>Hull: <span id="hull">100</span>%</div>
-    </div>
+  <main id="game">
 
-    <canvas id="gameCanvas"></canvas>
+    <!-- =========================
+         HUD
+    ========================== -->
+    <section id="hud">
 
-    <div id="controls">
-      <div class="move-pad">
-        <button id="up">▲</button>
-
-        <div>
-          <button id="left">◀</button>
-          <button id="down">▼</button>
-          <button id="right">▶</button>
-        </div>
+      <div class="hud-card">
+        Coin:
+        <span id="coins">0</span>
       </div>
 
-      <button id="fire">🎯 FIRE</button>
-      <button id="sell">🏝️ SELL</button>
-    </div>
-  </div>
+      <div class="hud-card">
+        Cargo:
+        <span id="cargo">0</span>/5
+      </div>
 
-  <script src="game.js"></script>
+      <div class="hud-card">
+        Oxygen:
+        <span id="oxygen">100</span>%
+      </div>
+
+      <div class="hud-card">
+        Hull:
+        <span id="hull">100</span>%
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         GAME CANVAS
+    ========================== -->
+    <section id="game-area">
+
+      <canvas
+        id="gameCanvas"
+        aria-label="Deep Catch gameplay area"
+      ></canvas>
+
+    </section>
+
+
+    <!-- =========================
+         MOBILE CONTROLS
+    ========================== -->
+    <section id="controls">
+
+      <div id="move-controls">
+
+        <button
+          id="up"
+          type="button"
+          aria-label="Naik"
+        >
+          ▲
+        </button>
+
+        <div class="horizontal-controls">
+
+          <button
+            id="left"
+            type="button"
+            aria-label="Kiri"
+          >
+            ◀
+          </button>
+
+          <button
+            id="down"
+            type="button"
+            aria-label="Turun"
+          >
+            ▼
+          </button>
+
+          <button
+            id="right"
+            type="button"
+            aria-label="Kanan"
+          >
+            ▶
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div id="action-controls">
+
+        <button
+          id="fire"
+          type="button"
+        >
+          🎯 FIRE
+        </button>
+
+        <button
+          id="sell"
+          type="button"
+        >
+          🏝️ SELL
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- versi diberi ?v=2 agar browser tidak memakai cache lama -->
+  <script src="game.js?v=2"></script>
+
 </body>
 </html>
