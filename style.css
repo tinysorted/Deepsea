@@ -1,72 +1,293 @@
 * {
   box-sizing: border-box;
-  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #041522;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
-  background: #061826;
-  font-family: Arial, sans-serif;
-  color: white;
+  min-height: 100%;
+}
+
+button {
+  font-family: inherit;
+  touch-action: manipulation;
 }
 
 #game {
   width: 100%;
-  max-width: 700px;
-  margin: auto;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  background: #061826;
 }
+
+/* =========================
+   HUD
+========================= */
 
 #hud {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
-  padding: 10px;
-  background: #09283c;
-}
-
-#hud div {
-  background: #0d3851;
   padding: 8px;
-  border-radius: 8px;
-  text-align: center;
+  background: #08293d;
+  position: relative;
+  z-index: 20;
 }
 
-canvas {
+#hud > div {
+  min-width: 0;
+  padding: 7px 6px;
+  border-radius: 10px;
+  background: #0e425e;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#hud > div:nth-child(5) {
+  grid-column: 2 / 3;
+}
+
+/* =========================
+   GAME AREA
+========================= */
+
+#game-area {
+  position: relative;
+  width: 100%;
+}
+
+#gameCanvas {
   display: block;
   width: 100%;
-  height: 430px;
-  background: linear-gradient(
-    #67cfe4 0%,
-    #217b9c 35%,
-    #123e5c 70%,
-    #051c2e 100%
-  );
+  height: auto;
+  aspect-ratio: 720 / 520;
+  background: #0b5274;
+  touch-action: none;
 }
+
+/* =========================
+   MESSAGE BOX
+========================= */
+
+#messageBox {
+  max-width: 72%;
+  text-align: center;
+  line-height: 1.25;
+  backdrop-filter: blur(3px);
+}
+
+/* =========================
+   CONTROL AREA
+========================= */
 
 #controls {
-  padding: 10px;
-  text-align: center;
-  background: #09283c;
+  position: relative;
+  min-height: 190px;
+  padding: 12px 14px 18px;
+  background:
+    linear-gradient(
+      180deg,
+      #08283c 0%,
+      #061b2b 100%
+    );
 }
 
-button {
-  min-width: 60px;
-  min-height: 50px;
-  margin: 4px;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
+/* =========================
+   MOVEMENT PAD
+========================= */
+
+#move-controls {
+  position: absolute;
+  left: 14px;
+  bottom: 18px;
+  width: 160px;
+  height: 160px;
+}
+
+#move-controls button {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  min-height: 54px;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #4f6f83 0%,
+      #263f51 65%,
+      #142734 100%
+    );
+  color: white;
+  font-size: 22px;
   font-weight: bold;
+  box-shadow:
+    inset 0 0 8px rgba(255, 255, 255, 0.14),
+    0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+#up {
+  left: 53px;
+  top: 0;
+}
+
+#left {
+  left: 0;
+  top: 54px;
+}
+
+#down {
+  left: 53px;
+  top: 106px;
+}
+
+#right {
+  right: 0;
+  top: 54px;
+}
+
+#move-controls button:active {
+  transform: scale(0.94);
+  background: #527d96;
+}
+
+/* =========================
+   ACTION CONTROLS
+========================= */
+
+#action-controls {
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+  width: 150px;
+  height: 155px;
 }
 
 #fire {
-  background: orange;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 105px;
+  height: 105px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ffb340,
+      #de6f00 68%,
+      #934300
+    );
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+  box-shadow:
+    inset 0 0 14px rgba(255, 255, 255, 0.2),
+    0 5px 14px rgba(0, 0, 0, 0.45);
+}
+
+#fire:active {
+  transform: scale(0.94);
 }
 
 #sell {
-  background: #43c46b;
+  position: absolute;
+  right: 12px;
+  top: 0;
+  width: 95px;
+  min-height: 42px;
+  border: 1px solid #63dda1;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      180deg,
+      #2dbb74,
+      #157c4b
+    );
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.32);
 }
 
-.move-pad {
-  margin-bottom: 6px;
+#sell:active {
+  transform: scale(0.96);
+}
+
+/* =========================
+   MOBILE SMALL SCREEN
+========================= */
+
+@media (max-width: 480px) {
+
+  #hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    padding: 7px;
+  }
+
+  #hud > div {
+    font-size: 12px;
+    padding: 6px 4px;
+  }
+
+  #hud > div:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  #controls {
+    min-height: 180px;
+  }
+
+  #move-controls {
+    left: 8px;
+    bottom: 10px;
+    transform: scale(0.9);
+    transform-origin: left bottom;
+  }
+
+  #action-controls {
+    right: 8px;
+    bottom: 12px;
+    transform: scale(0.92);
+    transform-origin: right bottom;
+  }
+
+  #messageBox {
+    top: 74px !important;
+    font-size: 12px !important;
+    max-width: 68%;
+  }
+}
+
+/* =========================
+   VERY SMALL SCREEN
+========================= */
+
+@media (max-width: 360px) {
+
+  #move-controls {
+    transform: scale(0.82);
+  }
+
+  #action-controls {
+    transform: scale(0.84);
+  }
+
+  #controls {
+    min-height: 165px;
+  }
 }
